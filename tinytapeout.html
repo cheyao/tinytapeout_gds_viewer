@@ -15,20 +15,15 @@
 </head>
 
 <body>
-    <script type="importmap">
-        {
-            "imports": {
-                "objloader" : "https://unpkg.com/three@0.144.0/examples/jsm/loaders/OBJLoader.js",
-                "gltfloader" : "https://unpkg.com/three@0.144.0/examples/jsm/loaders/GLTFLoader.js",
-                "fontloader" : "https://unpkg.com/three@0.144.0/examples/jsm/loaders/FontLoader.js",
-                "orbitcontrols" : "https://unpkg.com/three@0.144.0/examples/jsm/controls/OrbitControls.js",
-                "textgeometry" : "https://unpkg.com/three@0.144.0/examples/jsm/geometries/TextGeometry.js",
-                "three": "https://unpkg.com/three@0.144.0/build/three.module.js",
-                "rectlights": "https://unpkg.com/three@0.144.0/examples/jsm/lights/RectAreaLightUniformsLib.js",
-                "datgui" :  "https://unpkg.com/three@0.144.0/examples/jsm/libs/lil-gui.module.min.js"
-            }
-        }
-    </script>
+    <!-- Note: All the code in the following inports belong to it's own owners, It is inlined just because their server has a slow ping-->
+    <script src="./OBJLoader.js"></script>
+    <script src="./GLTFLoader.js"></script>
+    <script src="./FontLoader.js"></script>
+    <script src="./OrbitControls.js"></script>
+    <script src="./TextGeometry.js"></script>
+    <script src="./three.module.js"></script>
+    <script src="./RectAreaLightUniformsLib.js"></script>
+    <script src="./lil-gui.module.min.js"></script>
 
     <div style="position: absolute; color:white; left: 5px; top: 5px;">
         <div>KEYS
@@ -286,29 +281,29 @@
                     if (object.parent.parent.name != "" && object.parent.visible) {
                         informationDiv.innerHTML = ("Mouse over: " + object.parent.name + " (" + object.parent.userData["type"] + ")");
 
-                        
+
                         if (highlightedObjects == null) {
                             highlightedObjects = [];
                             previousMaterials = [];
                         }
 
                         let node = object.parent;
-              
+
                         for (var mesh_idx = 0; mesh_idx < node.children.length; mesh_idx++) {
                             let obj = node.children[mesh_idx];
                             if(obj instanceof THREE.Mesh) {
-                                
+
                                 if (highlightedObjects.indexOf(obj) == -1) {
                                     previousMaterials.push(obj.material);
                                     highlightedObjects.push(obj);
                                     obj.material = highlightMaterial;
-                                    
-                                    
+
+
                                 }
                             }
                         }
 
-                        
+
 
                     }
                     // object.material.color.set(Math.random() * 0xffffff);
@@ -365,7 +360,7 @@
 
         function actionHighlightCellType(cell_type) {
             turnOffHighlight();
-            
+
             if (highlightedObjects == null) {
                 highlightedObjects = [];
                 previousMaterials = [];
@@ -376,18 +371,18 @@
                     for (var k = 0; k < scene.children[i].children[j].children.length; k++) {
                         let node = scene.children[i].children[j].children[k];
                         if (node.userData["type"] != undefined && node.userData["type"] == cell_type) {
-                            //node.visible = !node.visible;                            
+                            //node.visible = !node.visible;
 
                             for (var mesh_idx = 0; mesh_idx < node.children.length; mesh_idx++) {
                                 let obj = node.children[mesh_idx];
                                 if(obj instanceof THREE.Mesh) {
-                                    
+
                                     if (highlightedObjects.indexOf(obj) == -1) {
                                         previousMaterials.push(obj.material);
                                         highlightedObjects.push(obj);
                                         obj.material = highlightMaterial;
-                                       
-                                        
+
+
                                     }
                                 }
                             }
@@ -396,7 +391,7 @@
                     }
                 }
             }
-        
+
         }
 
 
@@ -458,7 +453,7 @@
                         }
                     }
                     controls.reset();
-                    // camera.position.set(prevCameraPos);                    
+                    // camera.position.set(prevCameraPos);
                     // // camera.up.set(prevCameraUp);
                     // controls.target.set(prevControlTarget);
                     controls.update();
